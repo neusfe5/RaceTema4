@@ -159,9 +159,7 @@ subset(cran, country == "ES" & as.numeric(version) > 3.4)
 
 7. Elige aquellas descargas realizadas desde España (ES), o Portugal (PT).
 ```{r}
-
-
-
+subset(cran, country == "ES" | country == "PT")
 ```
 
 8. Elige aquellas descargas cuyo tamaño supera los 100500 bytes desde un sistema operativo  `linux-gnu`.
