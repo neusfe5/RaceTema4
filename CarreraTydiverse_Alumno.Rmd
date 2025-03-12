@@ -210,7 +210,11 @@ cran3$correct_size <- cran3$size + 1000
 ```
 18. Usa `summarise` para determinar el valor medio del tamaño de las descargas realizadas en `cran` y almacenálo en la variable `avg_bytes`
 ```{r}
+library(dplyr)
 
+avg_bytes <- cran %>%
+  summarise(mean_size = mean(size, na.rm = TRUE)) %>%
+  pull(mean_size)  
 ```
 # Agrupamientos
 
