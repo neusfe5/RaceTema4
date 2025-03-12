@@ -172,7 +172,7 @@ subset(cran, r_os != "")
 ```
 10. Almacena en `cran2` todas las columnas entre `size` y `ip_id`. 
 ```{r}
-
+cran2 <- cran[, c("size", "r_version", "r_arch", "r_os", "package", "version", "country", "ip_id")]
 ```
 11. Ordena `cran2` en orden ascendente según la variable `ip_id`.
 ```{r}
