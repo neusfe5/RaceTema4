@@ -444,18 +444,15 @@ sat_tidy %>%
 ```
 37. Representa gráficamente el conjunto obtenido para mostrar las diferencias entre hombres y mujeres, en las diferentes pruebas para cada una de las franjas de calificación.
 ```{r}
-
-
-
-
-
-
-
-
-
-
-
-
+ggplot(sat_tidy, aes(x = score_range, y = count, color = sex, group = sex)) +
+  geom_line() +
+  facet_wrap(~part) +
+  labs(
+    title = "Diferencias por Sexo en las Puntuaciones SAT",
+    x = "Rango de Puntuación",
+    y = "Número de Estudiantes"
+  ) +
+  theme_minimal()
 ```
 
 
