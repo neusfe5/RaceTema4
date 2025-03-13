@@ -460,13 +460,15 @@ ggplot(sat_tidy, aes(x = score_range, y = count, color = sex, group = sex)) +
 
 38. La función `today` devuelve la fecha actual. Almacéna la fecha actual en `this_day`, y muéstrala por pantalla. Usa las funciones `year, month y day` para extraer cada una de las partes. `wday` para obtener el día de la semana ()
 ```{r}
+library(lubridate)
 
+this_day <- today()
+print(this_day)
 
-
-
-
-
-
+year(this_day)
+month(this_day)
+day(this_day)
+wday(this_day, label = TRUE)
 ```
 39. Guarda el instante actual en una variable llamada `this_moment` con la función `now`
 y muéstralo por pantalla. Usa las funciónes `hour, minute, second` para extraer la información de cada elemento.
