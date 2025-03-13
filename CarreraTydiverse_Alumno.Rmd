@@ -493,9 +493,8 @@ mdy("March 12, 1975")
 fecha<-'19200102'
 ymd(fecha)
 
-
-
-
+dmy("25081985")
+ymd("19200102")
 ```
 42. Almacena la cadena `2014-08-23 17:23:02` en la variable `dt1`  e impórtala para que incluya la fecha y la hora,posteriormente importa la cadena `"03:22:14"` (hh:mm:ss)
 ```{r}
