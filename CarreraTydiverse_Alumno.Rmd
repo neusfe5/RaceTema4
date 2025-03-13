@@ -426,12 +426,13 @@ bind_rows(
 Considera los datos almacenado en `sat` y haz las transformaciones adecuadas para que las columnas del conjunto `tidy` sean `score_range, part, sex, count` en ese orden. Ten en cuenta que los datos totales no es necesario almacenarlos ya que se pueden generar a posteriori.
 
 ```{r}
-
-
-
-
-
-
+sat %>%
+  pivot_longer(
+    cols = c("read_male", "read_fem", "math_male", "math_fem", "write_male", "write_fem"),
+    names_to = c("part", "sex"),
+    names_sep = "_",
+    values_to = "count"
+  )
 ```
 
 36. Utiliza agrupamientos, según las variables `part, sex` y genera dos nuevas columnas que contengan el número total de estudiantes en dicho grupo, y la proporción dentro del grupo. Almacénalas en las variables `total y prop` respectivamente.
