@@ -305,9 +305,22 @@ cran %>%
 `cran%>%...+geom_point()`
 
 ```{r}
+library(dplyr)
+library(ggplot2)
 
-
-
+cran %>%
+  group_by(country) %>%
+  summarise(total_traffic = sum(size, na.rm = TRUE)) %>%
+  filter(total_traffic > quantile(total_traffic, probs = 0.90)) %>%
+  arrange(desc(total_traffic)) %>%
+  ggplot(aes(x = reorder(country, -total_traffic), y = total_traffic)) +
+  geom_point() +
+  labs(
+    title = "Tráfico de Información por País",
+    x = "Código de País",
+    y = "Tráfico Total (bytes)"
+  ) +
+  theme_minimal()
 
 ```
 **EXTRA** Tal como se indica en el ejercicio, el significado de los códigos usados para la codificación de los paise se pueden obtener de https://dev.maxmind.com/geoip/geoip2/geolite2/. Descarga el fichero **GeoLite2 Country** en formato CSV. Este fichero contiene información en varios idiomas. Usa `GeoLite2-Country-Locations-es.csv` que tiene la información en español. Deseamos poder determinar las descargas por continentes por lo que necesitamos añadir esta información a los datos de las descargas almacenados en `cran`. Procede de la siguiente forma:
@@ -320,19 +333,28 @@ cran %>%
  + Representa un diagrama de barras con el flujo de datos, por continente, ordenados de mayor a menor. Expresa el flujo de datos en Terabytes (1Tb=2^40bytes)
  
 ```{r}
+code_paises <- read.csv("GeoLite2-Country-Locations-es.csv", encoding = "UTF-8")
 
+cran <- cran %>% filter(!is.na(country))
 
+code_paises <- code_paises %>% filter(!is.na(country_iso_code))
 
+cran <- cran %>%
+  left_join(code_paises %>% select(country_iso_code, continent_name), 
+            by = c("country" = "country_iso_code"))
 
-
-
-
-
-
-
-
-
-
+cran %>%
+  group_by(continent_name) %>%
+  summarise(total_traffic_tb = sum(size, na.rm = TRUE) / 2^40) %>%
+  arrange(desc(total_traffic_tb)) %>%
+  ggplot(aes(x = reorder(continent_name, -total_traffic_tb), y = total_traffic_tb)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(
+    title = "Flujo de Datos por Continente",
+    x = "Continente",
+    y = "Tráfico Total (Terabytes)"
+  ) +
+  theme_minimal()
 ```
 
 # tidyr.
