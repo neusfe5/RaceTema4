@@ -426,7 +426,7 @@ bind_rows(
 Considera los datos almacenado en `sat` y haz las transformaciones adecuadas para que las columnas del conjunto `tidy` sean `score_range, part, sex, count` en ese orden. Ten en cuenta que los datos totales no es necesario almacenarlos ya que se pueden generar a posteriori.
 
 ```{r}
-sat %>%
+sat_tidy <- sat %>%
   pivot_longer(
     cols = c("read_male", "read_fem", "math_male", "math_fem", "write_male", "write_fem"),
     names_to = c("part", "sex"),
@@ -437,15 +437,10 @@ sat %>%
 
 36. Utiliza agrupamientos, según las variables `part, sex` y genera dos nuevas columnas que contengan el número total de estudiantes en dicho grupo, y la proporción dentro del grupo. Almacénalas en las variables `total y prop` respectivamente.
 ```{r}
-
-
-
-
-
-
-
-
-
+sat_tidy %>%
+  group_by(part, sex) %>%
+  summarise(total = sum(count, na.rm = TRUE)) %>%
+  mutate(prop = total / sum(total))
 ```
 37. Representa gráficamente el conjunto obtenido para mostrar las diferencias entre hombres y mujeres, en las diferentes pruebas para cada una de las franjas de calificación.
 ```{r}
