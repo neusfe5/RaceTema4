@@ -379,10 +379,9 @@ students %>%
 ```
 30. Considera el conjunto ´students2´, que es similar al primero pero que se han recogido datos correspondientes a dos grupos, (`male_1, female_1`, etc). Transfórmalo en un conjunto `tidy` añadiendo una columna adicional correspondiente al grupo (llama a la nueva variable `class`)
 ```{r}
-
-
-
-
+students2 %>%
+  pivot_longer(cols = starts_with("male_"), names_to = "sex_class", values_to = "count") %>%
+  separate(col = sex_class, into = c("sex", "class"), sep = "_")
 ```
 31. Considera el conjunto `students3` y observa por qué no es un `tidy data` . Las variables finales del conjunto deberían ser: `name, class, midterm, final`. Dado que un alumno solo puede estar en una de las clases aparecen muchos `NA`, al reorganizar, usa `na.rm=TRUE` en las opciones de `gather`
 ```{r}
