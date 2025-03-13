@@ -403,15 +403,15 @@ print(students3_tidy)
 ```
 33. Observa el conjunto `students4` donde se presenta el problema de tener varias observaciones en la misma tabla. Separa el conjunto en dos tablas, una que contenga información relativa a los estudiantes, que llamarás `student_info`, que no debe contener repeticiones, y otra con las calificaciones y la clave primaria que enlaza ambas tablas(`id`), que llamarás `gradebook`.
 ```{r}
+student_info <- students4 %>%
+  select(id, name, sex) %>%
+  distinct()
 
+gradebook <- students4 %>%
+  select(id, class, midterm, final)
 
-
-
-
-
-
-
-
+student_info
+gradebook
 ```
 34. Consideremos el caso de una observación almacenada en varias tablas. Observa los datos almacenados en `failed` y `passed` con la información de los alumnos que suspeden (calificaciones C,D,E,F) y los que aprueban (calificaciones A, B). Debes unir ambos conjuntos en uno que contenga una columna adicional llamada `status` que indicará `passed` o `failed` según la situación de cada alumno, puedes usar la función `bind_rows`.
 ```{r}
