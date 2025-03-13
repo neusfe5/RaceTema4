@@ -506,7 +506,8 @@ print(dt2)
 ```
 43. Importa el vector de fechas almacenado el `dt2`
 ```{r}
-
+dt2 <- c("2023-03-01", "2023-04-01", "2023-05-01")
+ymd(dt2)
 ```
 44. Podemos reasingar nuevos valores a una variable fecha/hora con la función `update`
 , por ejemplo: `update(this_moment, hours = 8, minutes = 34, seconds = 55)`. Actualiza la variable `this_moment` creada anteriormente para que contenga la hora actual.
